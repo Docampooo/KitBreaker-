@@ -1,0 +1,12 @@
+C:\Users\Usuario\source\repos\DI\JawBreaker!\JawBreaker!\bin\Debug\JawBreaker!.exe.config
+C:\Users\Usuario\source\repos\DI\JawBreaker!\JawBreaker!\bin\Debug\JawBreaker!.exe
+C:\Users\Usuario\source\repos\DI\JawBreaker!\JawBreaker!\bin\Debug\JawBreaker!.pdb
+C:\Users\Usuario\source\repos\DI\JawBreaker!\JawBreaker!\obj\Debug\JawBreaker!.csproj.AssemblyReference.cache
+C:\Users\Usuario\source\repos\DI\JawBreaker!\JawBreaker!\obj\Debug\JawBreaker_.Properties.Resources.resources
+C:\Users\Usuario\source\repos\DI\JawBreaker!\JawBreaker!\obj\Debug\JawBreaker!.csproj.GenerateResource.cache
+C:\Users\Usuario\source\repos\DI\JawBreaker!\JawBreaker!\obj\Debug\JawBreaker!.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\source\repos\DI\JawBreaker!\JawBreaker!\obj\Debug\JawBreaker!.exe
+C:\Users\Usuario\source\repos\DI\JawBreaker!\JawBreaker!\obj\Debug\JawBreaker!.pdb
+C:\Users\Usuario\source\repos\DI\JawBreaker!\JawBreaker!\obj\Debug\JawBreaker!.exe.config
+C:\Users\Usuario\source\repos\DI\JawBreaker!\JawBreaker!\obj\Debug\JawBreaker_.KitBreaker.resources
+C:\Users\Usuario\source\repos\DI\JawBreaker!\JawBreaker!\obj\Debug\JawBreaker_.Ayuda.resources
