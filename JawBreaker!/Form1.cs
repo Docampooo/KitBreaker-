@@ -5,8 +5,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Xsl;
@@ -32,6 +34,8 @@ namespace JawBreaker_
 
         List<Button> bloques = new List<Button>();
         List<int> romper = new List<int>();
+
+        int[] fueraDeRango = new int[] { -11, -1, 1, 11 };
 
 
         Image[] gatos = new Image[]
@@ -113,16 +117,6 @@ namespace JawBreaker_
 
                 //Añadir los contadores de cada uno de los gatos
 
-                //Label ContGatos = new Label();
-
-                //lblContGatos.BackColor = Color.White;
-
-                //lblContGatos.Location = new Point(xCont, yCont);
-                //lblContGatos.Text = i.ToString();
-
-                //pnInfo.Controls.Add(ContGatos);
-
-                //xCont = x + 22;
                 x = x + 50;
 
             }
@@ -146,35 +140,37 @@ namespace JawBreaker_
             }
 
             //Actualizar posicion
-            int c = -1;
+
+            int c = bloques.Count;//Comenzar en la última posicion 
+
             for (int i = 11; i >= 0; i--) //filas 
             {
 
                 for (int j = 10; j >= 0; j--) //columnas
                 {
-                    c++;
+                    c--;
 
-                    if (bloques[i] != null)
+                    int bloqueDebajo = c + 11;
+
+                    while (bloqueDebajo < bloques.Count && bloques[bloqueDebajo] == null)
                     {
-                        if (i < 11 && bloques[i + 11] == null)//De la fila 0 a la fila 10 funciona igual --> bloque debajo
-                        {
-                            bloques.Insert(c + 11, bloques[c]);
-                            bloques[c] = null;
-                        }
+                        bloques[bloqueDebajo] = bloques[bloqueDebajo - 11];
+                        bloques[bloqueDebajo - 11] = null;
 
-                        //Añadir para que se muevan a la izquierda también
+                        bloqueDebajo += 11;
                     }
 
                 }
             }
-            MessageBox.Show(depurador());
 
+            MessageBox.Show(depurador());
             pnJuego.Controls.Clear();
 
             for (int i = 0; i < bloques.Count; i++)
             {
                 pnJuego.Controls.Add(bloques[i]);
             }
+
         }
 
         public string depurador()
@@ -312,96 +308,16 @@ namespace JawBreaker_
             int c = -1;
             for (int i = 0; i < 12; i++) //filas 
             {
-
                 for (int j = 0; j < 11; j++) //columnas
                 {
-                    c++;
-                    try
+                    c++; //Contador del indice
+
+                    if (bloques[c] == btn)
+
                     {
-                        if (bloques[c] == btn)
-
-                        {
-                            encontrado = false;
-                            if (i == 0)//Fila 0
-                            {
-                                if (j > 0 && bloques[c - 1].BackgroundImage == btn.BackgroundImage)//Excepcion si se trata del primer elemento de la columna 
-                                {
-                                    encontrado = true;
-                                    romper.Add(c - 1);
-                                }
-
-                                if (bloques[c + 11].BackgroundImage == btn.BackgroundImage)
-                                {
-                                    encontrado = true;
-                                    romper.Add(c + 11);
-                                }
-
-                                if (j < 10 && bloques[c + 1].BackgroundImage == btn.BackgroundImage)//Excepcion si se trata del ultimo elemento de la columna 
-                                {
-                                    encontrado = true;
-                                    romper.Add(c + 1);
-                                }
-                            }
-
-                            if (i > 0 && i < 11)//Filas 1 a 10
-                            {
-                                if (j > 0 && bloques[c - 1].BackgroundImage == btn.BackgroundImage)//Excepcion si se trata del primer elemento de la columna 
-                                {
-                                    encontrado = true;
-                                    romper.Add(c - 1);
-                                }
-
-                                if (bloques[c + 11].BackgroundImage == btn.BackgroundImage)
-                                {
-                                    encontrado = true;
-                                    romper.Add(c + 11);
-                                }
-
-                                if (bloques[c - 11].BackgroundImage == btn.BackgroundImage)
-                                {
-                                    encontrado = true;
-                                    romper.Add(c - 11);
-                                }
-
-                                if (j < 10 && bloques[c + 1].BackgroundImage == btn.BackgroundImage)//Excepcion si se trata del ultimo elemento de la columna 
-                                {
-                                    encontrado = true;
-                                    romper.Add(c + 1);
-                                }
-                            }
-
-                            if (i == 11)//Fila 11
-                            {
-                                if (j > 0 && bloques[c - 1].BackgroundImage == btn.BackgroundImage)//Excepcion si se trata del primer elemento de la columna 
-                                {
-                                    encontrado = true;
-                                    romper.Add(c - 1);
-                                }
-
-                                if (bloques[c - 11].BackgroundImage == btn.BackgroundImage)
-                                {
-                                    encontrado = true;
-                                    romper.Add(c - 11);
-                                }
-
-                                if (j < 10 && bloques[c + 1].BackgroundImage == btn.BackgroundImage)//Excepcion si se trata del ultimo elemento de la columna 
-                                {
-                                    encontrado = true;
-                                    romper.Add(c + 1);
-                                }
-                            }
-
-                            if (encontrado)
-                            {
-                                romper.Add(c);
-                            }
-
-                        }
+                        buscarBloques(i, j, c, btn);
                     }
-                    catch (NullReferenceException)
-                    {
 
-                    }
                 }
             }
 
@@ -409,10 +325,62 @@ namespace JawBreaker_
             {
                 MessageBox.Show($"{romper.Count}", "prueba", MessageBoxButtons.OK);
                 actualizarBloques();
-
-
             }
 
+        }
+
+        public void buscarBloques(int i, int j, int c, Button btn)// --> fila, columna, indice bloques, boton pulsado
+        {
+            bool encontrado = false;
+
+            for (int p = 0; p < fueraDeRango.Length; p++) // --> Busca en los valores de fuera de rango
+            {
+
+                int bloqueProximo = c + fueraDeRango[p];
+                if (bloqueExiste(bloqueProximo) && bloques[bloqueProximo].BackgroundImage == btn.BackgroundImage)
+                {
+                    romper.Add(bloqueProximo);
+                    encontrado = true;
+                }
+            }
+
+            if (encontrado)
+            {
+                romper.Add(c);
+            }
+        }
+
+        public bool isBloqueNull(int bloque) // Comprueba si el bloque es null
+        {
+            if (bloques[bloque] is null)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool comprobarBloque(int posicion, Button btn) //comprueba si el bloque en la posicion tiene la misma imagen que el bloque del boton
+        {
+            if (bloques[posicion].BackgroundImage == btn.BackgroundImage)
+            {
+                romper.Add(posicion);
+                return true;
+
+            }
+            return false;
+        }
+
+        public bool bloqueExiste(int indice)
+        {
+            if (indice >= 0 && indice < bloques.Count)
+            {
+                if (bloques[indice] != null)
+                {
+                    return true;
+                }
+
+            }
+            return false;
         }
     }
 }
