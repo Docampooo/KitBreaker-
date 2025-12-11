@@ -133,6 +133,9 @@
   <data name="gatoNegro" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\gatoNegro.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="mBase" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mBase.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="nubesMoradas" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\nubesMoradas.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -144,5 +147,8 @@
   </data>
   <data name="pocoDetallado" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pocoDetallado.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sBip" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sBip.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

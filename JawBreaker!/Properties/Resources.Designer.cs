@@ -111,6 +111,15 @@ namespace JawBreaker_.Properties {
         }
         
         /// <summary>
+        ///   Busca un recurso adaptado de tipo System.IO.UnmanagedMemoryStream similar a System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream mBase {
+            get {
+                return ResourceManager.GetStream("mBase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap nubesMoradas {
@@ -147,6 +156,15 @@ namespace JawBreaker_.Properties {
             get {
                 object obj = ResourceManager.GetObject("pocoDetallado", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.IO.UnmanagedMemoryStream similar a System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream sBip {
+            get {
+                return ResourceManager.GetStream("sBip", resourceCulture);
             }
         }
     }
